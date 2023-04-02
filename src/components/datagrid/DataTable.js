@@ -12,8 +12,8 @@ const columns = [
         width: 200,
         renderCell: (params) => (
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <Avatar alt="Remy Sharp" src={`${params.row.thumb}`} />
-                {`${params.row.name} ${params.row.symbol}`}
+                <Avatar alt="Coin Logo" src={`${params.row.thumb}`} />
+                {`${params.row.name} -  ${params.row.symbol}`}
             </div>
         ),
     },
@@ -22,12 +22,7 @@ const columns = [
 const DataTable = ({ data }) => {
     return (
         <Box sx={{ height: "100vh", width: "100%" }}>
-            <DataGrid
-                rows={data}
-                columns={columns}
-                pageSizeOptions={[5]}
-                // disableRowSelectionOnClick
-            />
+            <DataGrid rows={data} columns={columns} pageSizeOptions={[100]} />
         </Box>
     );
 };

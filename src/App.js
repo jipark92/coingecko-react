@@ -3,39 +3,29 @@ import "./App.css";
 import DataTable from "./components/datagrid/DataTable";
 import NavBar from "./components/navbar/NavBar";
 import axios from "axios";
+import { HTTP_STATUS } from "./constants/constants";
 
 function App() {
     const [coinData, setCoinData] = useState([]);
-    const [coin, setCoin] = useState([]);
+    const [searchData, setSearchData] = useState([]);
 
     useEffect(() => {
-        getAllCoinData();
-        getCoin();
-    }, []);
+        getCoinData();
+    }, [searchData]);
 
-    const getAllCoinData = async () => {
-        const response = await axios.get(
-            "https://api.coingecko.com/api/v3/search?query=%20"
-        );
-        if (response.status === 200) {
+    const getCoinData = async () => {
+        const response = await axios({
+            url: `https://api.coingecko.com/api/v3/search?query=${searchData}`,
+            method: "get",
+        });
+        if (response.status === HTTP_STATUS.OK) {
             setCoinData(response.data?.coins);
         }
     };
 
-    const getCoin = async () => {
-        const response = await axios.get(
-            "https://api.coingecko.com/api/v3/search?query=%20"
-        );
-        if (response.status === 200) {
-            setCoin(response.data);
-        }
-    };
-
-    console.log("data", coin);
-
     return (
         <div className="App">
-            <NavBar />
+            <NavBar setSearchData={setSearchData} />
             <DataTable data={coinData} />
         </div>
     );

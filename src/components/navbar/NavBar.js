@@ -6,6 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import PropTypes from "prop-types";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -49,7 +50,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const NavBar = () => {
+const NavBar = ({ setSearchData }) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -64,6 +65,7 @@ const NavBar = () => {
                         <StyledInputBase
                             placeholder="Search…"
                             inputProps={{ "aria-label": "search" }}
+                            onChange={(e) => setSearchData(e.target.value)}
                         />
                     </Search>
                 </Toolbar>
@@ -73,5 +75,9 @@ const NavBar = () => {
 };
 
 const navbarContainer = { display: "flex", justifyContent: "space-between" };
+
+NavBar.propTypes = {
+    setSearchData: PropTypes.func,
+};
 
 export default NavBar;
