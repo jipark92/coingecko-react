@@ -4,7 +4,7 @@ import DataTable from "./components/datagrid/DataTable";
 import NavBar from "./components/navbar/NavBar";
 import ToastBar from "./components/toast/ToastBar";
 import axios from "axios";
-// import { HTTP_STATUS } from "./constants/constants";
+import { HTTP_STATUS } from "./constants/constants";
 
 function App() {
     const [coinData, setCoinData] = useState([]);
@@ -24,7 +24,7 @@ function App() {
             url: `https://api.coingecko.com/api/v3/search?query=${searchData}`,
             method: "get",
         });
-        if (response.status !== 200) {
+        if (response.status !== HTTP_STATUS.OK) {
             setIsErrorModalOpen({ ...isErrorModalOpen, open: true });
         }
         setCoinData(response.data?.coins);
