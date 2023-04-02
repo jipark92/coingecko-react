@@ -31,7 +31,6 @@ function App() {
             if (response.status === HTTP_STATUS.OK) {
                 setCoinData(response.data?.coins);
             }
-            setCoinData(response.data?.coins);
         } catch (error) {
             setIsErrorModalOpen({ ...isErrorModalOpen, open: true });
         } finally {
