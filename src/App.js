@@ -3,7 +3,6 @@ import "./App.css";
 import DataTable from "./components/datagrid/DataTable";
 import NavBar from "./components/navbar/NavBar";
 import ToastBar from "./components/toast/ToastBar";
-import ProgressBar from "./components/progress/ProgressBar";
 import axios from "axios";
 import { HTTP_STATUS } from "./constants/constants";
 
@@ -32,6 +31,7 @@ function App() {
                 setCoinData(response.data?.coins);
             }
         } catch (error) {
+            console.log(error);
             setIsErrorModalOpen({ ...isErrorModalOpen, open: true });
         } finally {
             setIsLoading(false);
@@ -45,7 +45,7 @@ function App() {
                 handleClose={setIsErrorModalOpen}
             />
             <NavBar setSearchData={setSearchData} />
-            {isLoading ? <ProgressBar /> : <DataTable data={coinData} />}
+            <DataTable data={coinData} isLoading={isLoading} />
         </div>
     );
 }

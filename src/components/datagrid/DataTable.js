@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import { DataGrid } from "@mui/x-data-grid";
 import PropTypes from "prop-types";
+import ProgressBar from "../progress/ProgressBar";
 
 const columns = [
     { field: "market_cap_rank", headerName: "#" },
@@ -19,8 +20,10 @@ const columns = [
     },
 ];
 
-const DataTable = ({ data }) => {
-    return (
+const DataTable = ({ data, isLoading }) => {
+    return isLoading ? (
+        <ProgressBar />
+    ) : (
         <Box sx={{ height: "100vh", width: "100%" }}>
             <DataGrid rows={data} columns={columns} pageSizeOptions={[100]} />
         </Box>
@@ -29,6 +32,7 @@ const DataTable = ({ data }) => {
 
 DataTable.propTypes = {
     data: PropTypes.array,
+    isLoading: PropTypes.bool,
 };
 
 export default DataTable;
